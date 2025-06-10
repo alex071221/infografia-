@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Desmitificando la Tecnología RAID</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-box {
+            border: 2px solid #7a5195;
+            background-color: #ffffff;
+        }
+        .flowchart-arrow {
+            position: relative;
+            width: 2px;
+            background-color: #7a5195;
+            margin: 0 auto;
+        }
+        .flowchart-arrow::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            bottom: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #7a5195;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#7a5195] to-[#ef5675]">Desmitificando los RAID</h1>
+            <p class="text-lg md:text-xl text-gray-600 mt-4 max-w-3xl mx-auto">Una guía visual e interactiva para entender cómo proteger y acelerar tus datos con la tecnología RAID.</p>
+        </header>
+
+        <section id="que-es-raid" class="my-16">
+            <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-2">
+                    <h2 class="text-3xl font-bold text-[#003f5c] mb-4">¿Qué es exactamente una RAID?</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4">RAID son las siglas de "Matriz Redundante de Discos Independientes". Es una tecnología que combina múltiples discos duros en una sola unidad lógica para lograr dos objetivos principales: mejorar el rendimiento (haciendo todo más rápido) y/o proporcionar redundancia (protegiendo tus datos contra fallos de un disco).</p>
+                    <p class="text-gray-700 leading-relaxed">Piensa en ello como un equipo de discos trabajando juntos. Dependiendo de la estrategia (el "nivel" de RAID), pueden dividir el trabajo para ir más rápido o hacerse copias de seguridad entre ellos en tiempo real.</p>
+                </div>
+                <div class="text-8xl md:text-9xl text-center text-[#ffa600]">
+                    💿
+                </div>
+            </div>
+        </section>
+
+        <section id="niveles-raid" class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#003f5c]">Análisis de Niveles RAID Comunes</h2>
+                <p class="text-gray-600 mt-2">Cada nivel ofrece una combinación única de velocidad, seguridad y coste.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+                    <h3 class="text-2xl font-bold text-[#bc5090]">RAID 0 <span class="text-lg font-normal text-gray-500">(Entrelazado)</span></h3>
+                    <p class="text-gray-600 mt-2 flex-grow">Prioriza la velocidad por encima de todo. Los datos se dividen y se escriben en todos los discos a la vez.</p>
+                    <div class="mt-4">
+                        <p class="font-bold text-green-600">🚀 Beneficio: Rendimiento excepcional.</p>
+                        <p class="font-bold text-red-600">💔 Inconveniente: Cero redundancia. Si falla un disco, se pierden todos los datos.</p>
+                        <p class="font-bold text-blue-600 mt-2">🎯 Ideal para: Edición de video, renderizado, caché.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+                    <h3 class="text-2xl font-bold text-[#7a5195]">RAID 1 <span class="text-lg font-normal text-gray-500">(Espejo)</span></h3>
+                    <p class="text-gray-600 mt-2 flex-grow">La seguridad es lo primero. Todo lo que se escribe en un disco se duplica instantáneamente en otro.</p>
+                    <div class="mt-4">
+                        <p class="font-bold text-green-600">🛡️ Beneficio: Alta fiabilidad y redundancia.</p>
+                        <p class="font-bold text-red-600">💸 Inconveniente: Se pierde el 50% de la capacidad total.</p>
+                        <p class="font-bold text-blue-600 mt-2">🎯 Ideal para: Sistemas operativos, datos críticos.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+                    <h3 class="text-2xl font-bold text-[#374c80]">RAID 5 <span class="text-lg font-normal text-gray-500">(Paridad)</span></h3>
+                    <p class="text-gray-600 mt-2 flex-grow">Un equilibrio inteligente entre velocidad, capacidad y seguridad. Protegido contra el fallo de un disco.</p>
+                    <div class="mt-4">
+                        <p class="font-bold text-green-600">⚖️ Beneficio: Eficiencia y redundancia balanceadas.</p>
+                        <p class="font-bold text-red-600">⏳ Inconveniente: Reconstrucción lenta tras un fallo.</p>
+                        <p class="font-bold text-blue-600 mt-2">🎯 Ideal para: Servidores de archivos, copias de seguridad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="tendencias-mercado" class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#003f5c]">Tendencias de la Industria</h2>
+                <p class="text-gray-600 mt-2">Los datos son el nuevo petróleo, y su crecimiento exponencial impulsa la necesidad de soluciones de almacenamiento eficientes y seguras como RAID.</p>
+            </div>
+            <div class="flex justify-center">
+                <div class="bg-white rounded-2xl shadow-lg p-6 w-full max-w-2xl">
+                    <h3 class="text-xl font-bold text-center mb-4">Proyección Global de Creación de Datos</h3>
+                    <p class="text-sm text-gray-600 text-center mb-4">La cantidad de datos generados anualmente sigue una curva ascendente, haciendo indispensable la tecnología RAID para su gestión y protección a gran escala.</p>
+                    <div class="chart-container h-[300px] md:h-[350px]">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flujo-decision" class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#003f5c]">¿Qué Nivel RAID Elegir?</h2>
+                <p class="text-gray-600 mt-2">Sigue este flujo de decisión simplificado para orientarte.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="flowchart-box p-4 rounded-lg text-center shadow-md w-full max-w-sm">
+                    <p class="font-bold">¿Cuál es tu prioridad principal?</p>
+                </div>
+                <div class="flowchart-arrow h-8"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 w-full max-w-4xl relative">
+                    <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-[#7a5195] hidden md:block" style="z-index: -1; top: -32px;"></div>
+
+                    <div class="flex flex-col items-center">
+                        <div class="flowchart-box p-4 rounded-lg text-center shadow-md w-full max-w-xs">
+                            <p class="font-bold text-[#bc5090]">🚀 Velocidad Máxima</p>
+                        </div>
+                        <div class="flowchart-arrow h-8"></div>
+                        <div class="flowchart-box p-4 rounded-lg text-center shadow-md w-full max-w-xs bg-amber-100">
+                            <p class="font-bold">RAID 0</p>
+                            <p class="text-sm">Asumiendo el riesgo de pérdida de datos.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                         <div class="flowchart-box p-4 rounded-lg text-center shadow-md w-full max-w-xs">
+                            <p class="font-bold text-[#374c80]">🛡️ Seguridad de Datos</p>
+                        </div>
+                        <div class="flowchart-arrow h-8"></div>
+                        <div class="flowchart-box p-4 rounded-lg text-center shadow-md w-full max-w-xs">
+                            <p class="font-bold">¿Necesitas la máxima velocidad Y seguridad?</p>
+                        </div>
+                        <div class="flowchart-arrow h-8"></div>
+                         <div class="grid grid-cols-2 gap-4 w-full max-w-xs">
+                             <div class="flex flex-col items-center">
+                                <div class="flowchart-box p-3 rounded-lg text-center shadow-md w-full bg-teal-100">
+                                    <p class="font-bold">Sí</p>
+                                    <p class="text-xs">RAID 10</p>
+                                </div>
+                             </div>
+                              <div class="flex flex-col items-center">
+                                <div class="flowchart-box p-3 rounded-lg text-center shadow-md w-full bg-pink-100">
+                                    <p class="font-bold">No</p>
+                                    <p class="text-xs">RAID 5 / 6</p>
+                                </div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 py-8 border-t">
+            <h3 class="text-xl font-bold text-[#003f5c] mb-4">Webgrafía</h3>
+            <div class="text-gray-600 text-sm max-w-4xl mx-auto space-y-2">
+                <p>Preton, W. (2024). *RAID technology: How it works and the types of RAID*. [en línea] TechTarget. Disponible en: https://www.techtarget.com/searchstorage/definition/RAID</p>
+                <p>Geier, E. (2023). *How to choose the right RAID level for your storage needs*. [en línea] PCWorld. Disponible en: https://www.pcworld.com/article/394336/how-to-choose-the-right-raid-level-for-your-storage-needs.html</p>
+                <p>Synology Inc. (2024). *¿Qué es RAID?*. [en línea] Synology. Disponible en: https://www.synology.com/es-es/support/RAID_calculator/RAID_What_is_RAID</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        const wrapLabel = (label, maxLength = 16) => {
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    if (currentLine.length > 0) {
+                        currentLine += ' ' + word;
+                    } else {
+                        currentLine = word;
+                    }
+                }
+            }
+            if (currentLine.length > 0) {
+                lines.push(currentLine);
+            }
+            return lines;
+        };
+        
+        const tooltipTitleCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            return Array.isArray(label) ? label.join(' ') : label;
+                        }
+                    }
+                }
+            }
+        };
+
+        const chartColors = ['#7a5195', '#bc5090', '#ef5675', '#ff764a', '#ffa600'];
+
+        const growthCtx = document.getElementById('growthChart').getContext('2d');
+        new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['2021', '2022', '2023', '2024', '2025 (Est.)', '2026 (Est.)'],
+                datasets: [{
+                    label: 'Datos Creados (Zettabytes)',
+                    data: [79, 97, 120, 148, 181, 221],
+                    borderColor: '#ef5675',
+                    backgroundColor: 'rgba(239, 86, 117, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' ZB';
+                            }
+                        }
+                    }
+                },
+                ...tooltipTitleCallback
+            }
+        });
+    </script>
+</body>
+</html>
